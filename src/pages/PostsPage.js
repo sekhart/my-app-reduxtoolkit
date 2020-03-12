@@ -1,40 +1,31 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { fetchPosts } from '../actions/postsActions'
-import { fetchComments } from '../actions/commentsActions'
-import { Post } from '../components/Post'
-import { Comment } from '../components/Comment'
+import { fetchPosts, postsSelector } from "../slices/posts";
 
-const PostsPage = ({ dispatch, posts, loading, hasErrors }) => {
-        useEffect(() => {
-            dispatch(fetchPosts())
-            dispatch(fetchComments())
-        }, [dispatch])
+import { Post } from "../components/Post";
 
-        const renderPosts = () => {
-            if (loading) return <p > Loading Posts... < /p>
-            if (hasErrors) return <p > Unable to display Posts. < /p>
-            return posts.map(post => < Post key = { post.id }
-                post = { post }
-                excerpt > < /Post>)
+const PostsPage = () => {
+  const dispatch = useDispatch();
+  const { posts, loading, hasErrors } = useSelector(postsSelector);
 
-            }
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
 
-            return ( <
-                section >
-                <
-                h1 > Posts < /h1> { renderPosts() } <
-                /section>
-            )
-        }
+  const renderPosts = () => {
+    if (loading) return <p>Loading posts...</p>;
+    if (hasErrors) return <p>Unable to display posts.</p>;
 
-        const mapStateToProps = state => ({
-            loading: state.posts.loading,
-            posts: state.posts.posts,
-            hasErrors: state.posts.hasErrors,
+    return posts.map(post => <Post key={post.id} post={post} excerpt />);
+  };
 
-        })
+  return (
+    <section>
+      <h1>Posts</h1>
+      {renderPosts()}
+    </section>
+  );
+};
 
-
-        export default connect(mapStateToProps)(PostsPage)
+export default PostsPage;

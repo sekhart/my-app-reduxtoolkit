@@ -7,7 +7,7 @@ const DashboardPage = () => (
         <p>This is the dashboard.</p>
         <div class='container-body'>
             <Link to="/posts" className="button">View Posts</Link> &nbsp;&nbsp;
-            <Link to="/users" className="button">View Users</Link>
+            {/* <Link to="/users" className="button">View Users</Link> */}
         </div>
     </section>
 )
