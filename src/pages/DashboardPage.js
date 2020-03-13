@@ -5,9 +5,9 @@ const DashboardPage = () => (
     <section>
         <h1>Dashboard</h1>
         <p>This is the dashboard.</p>
-        <div class='container-body'>
+        <div className='container-body'>
             <Link to="/posts" className="button">View Posts</Link> &nbsp;&nbsp;
-            {/* <Link to="/users" className="button">View Users</Link> */}
+            <Link to="/users" className="button">View Users</Link>
         </div>
     </section>
 )
